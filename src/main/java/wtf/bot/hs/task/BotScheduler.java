@@ -8,6 +8,7 @@ import wtf.bot.hs.service.DiscordService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.ProtocolException;
 import java.net.URL;
 
@@ -22,18 +23,18 @@ public class BotScheduler {
 //1800000L
     void pingMethod() throws IOException {
 
-        HttpURLConnection connection = (HttpURLConnection) new URL("https://horizont-bot.herokuapp.com/").openConnection();
+        URL url = new URL(InetAddress.getLocalHost().toString()) ;
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("HEAD");
         int responseCode = connection.getResponseCode();
         if (responseCode != 200) {
-            DiscordService.getDiscordService().testMessage(String.format(LOGGING_MESSAGE_FORMAT,"BotScheduler.class", "PING: "+responseCode,"NOT OK"));
+            DiscordService.getDiscordService().testMessage(String.format(LOGGING_MESSAGE_FORMAT,"BotScheduler.class","PING to "+url+": "+responseCode,"NOT OK"));
         } else {
-            DiscordService.getDiscordService().testMessage(String.format(LOGGING_MESSAGE_FORMAT,"BotScheduler.class",  "PING: "+responseCode,"OK"));
+            DiscordService.getDiscordService().testMessage(String.format(LOGGING_MESSAGE_FORMAT,"BotScheduler.class","PING to "+url+": "+responseCode,"OK"));
         }
 
         //DiscordService.getDiscordService().testMessage("BotScheduler | PING");
         log.info(String.format(LOGGING_MESSAGE_FORMAT,"BotScheduler.class", "PING","OK"));
-
     }
 }
 
