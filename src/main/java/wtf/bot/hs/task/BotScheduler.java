@@ -23,7 +23,7 @@ public class BotScheduler {
 //1800000L
     void pingMethod() throws IOException {
 
-        URL url = new URL(InetAddress.getLocalHost().toString()) ;
+        URL url = new URL("https://horizont-bot.herokuapp.com/") ;
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setConnectTimeout(3000);
