@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "org.springframework.boot.autoconfigure.web.ServerProperties.port",
+      "type": "java.lang.String",
+      "description": "Description for org.springframework.boot.autoconfigure.web.ServerProperties.port."
+  }
+] }
