@@ -19,13 +19,15 @@ import static wtf.bot.hs.service.DiscordService.*;
 @EnableScheduling
 public class BotScheduler {
 
-    @Scheduled(fixedDelay = 300000L, initialDelay = 300000L)
+    @Scheduled(fixedDelay = 1200000L, initialDelay = 1200000L)
 //1800000L
     void pingMethod() throws IOException {
 
         URL url = new URL(InetAddress.getLocalHost().toString()) ;
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("HEAD");
+        connection.setRequestMethod("GET");
+        connection.setConnectTimeout(3000);
+        connection.connect();
         int responseCode = connection.getResponseCode();
         if (responseCode != 200) {
             DiscordService.getDiscordService().testMessage(String.format(LOGGING_MESSAGE_FORMAT,"BotScheduler.class","PING to "+url+": "+responseCode,"NOT OK"));
@@ -37,48 +39,3 @@ public class BotScheduler {
         log.info(String.format(LOGGING_MESSAGE_FORMAT,"BotScheduler.class", "PING","OK"));
     }
 }
-
-
-
-//        String[] hostList = { "http://crunchify.com", "http://yahoo.com", "http://www.ebay.com",
-//                "https://google.com",
-//                "http://www.example.co", "https://paypal.com",
-//                "http://bing.com/", "http://techcrunch.com/", "http://mashable.com/",
-//                "https://thenextweb.com/", "http://wordpress.com/",
-//                "http://wordpress.org/", "http://example.com/", "http://sjsu.edu/",
-//                "https://ebay.co.uk/", "http://google.co.uk/", "http://wikipedia.org/" };
-//
-//        for (int i = 0; i < hostList.length; i++) {
-//
-//            String url = hostList[i];
-//            getStatus(url);
-//
-//        }
-//
-//        System.out.println("Task completed...");
-//    }
-
-//    public static String getStatus(String url) throws IOException {
-
-//        String result = "";
-//        int code = 200;
-//        try {
-//            URL siteURL = new URL(url);
-//            HttpURLConnection connection = (HttpURLConnection) siteURL.openConnection();
-//            connection.setRequestMethod("GET");
-//            connection.setConnectTimeout(3000);
-//            connection.connect();
-//
-//            code = connection.getResponseCode();
-//            if (code == 200) {
-//                result = "-> Green <-\t" + "Code: " + code;
-//                ;
-//            } else {
-//                result = "-> Yellow <-\t" + "Code: " + code;
-//            }
-//        } catch (Exception e) {
-//            result = "-> Red <-\t" + "Wrong domain - Exception: " + e.getMessage();
-//
-//        }
-//        System.out.println(url + "\t\tStatus:" + result);
-//        return result;
