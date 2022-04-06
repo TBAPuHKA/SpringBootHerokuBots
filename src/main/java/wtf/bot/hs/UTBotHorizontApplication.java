@@ -24,10 +24,5 @@ public class UTBotHorizontApplication {
 //===== START [DISCORD]
 		DiscordService discordService = DiscordService.getDiscordService();
 		discordService.startDiscord();
-
-//===== TESTS
-
-		//discordService.sendMessage(System.getenv("TELEGRAM_USER_NAME") +" "+ System.getenv("JAVA_HOME"));
-
 	}
 }

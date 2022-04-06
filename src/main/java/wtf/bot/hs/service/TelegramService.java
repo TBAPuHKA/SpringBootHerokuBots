@@ -1,7 +1,6 @@
 package wtf.bot.hs.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -9,22 +8,17 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-import static wtf.bot.hs.service.DiscordService.*;
+import wtf.bot.hs.AppConstants;
 
 @Slf4j
 @Service
-public class TelegramService  extends TelegramLongPollingBot {
+public class TelegramService extends TelegramLongPollingBot {
 
-    @Value("${telegram.token}")
-    private static final String TELEGRAM_TOKEN = System.getenv("TELEGRAM_TOKEN");
-    @Value("${telegram.username}")
-    private static final String TELEGRAM_USER_NAME = System.getenv("TELEGRAM_USER_NAME");
-
-    public static void startTelegram (){
+    public static void startTelegram() {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(new TelegramService());
-            log.warn(String.format(LOGGING_MESSAGE_FORMAT,"TelegramService.startTelegram()", "DONE","Bot is ONLINE"));
+            log.warn(String.format(AppConstants.LOGGING_MESSAGE_FORMAT, "TelegramService.startTelegram()", "DONE", "Bot is ONLINE"));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
@@ -32,12 +26,12 @@ public class TelegramService  extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return TELEGRAM_USER_NAME;
+        return AppConstants.TELEGRAM_USER_NAME;
     }
 
     @Override
     public String getBotToken() {
-        return TELEGRAM_TOKEN;
+        return AppConstants.TELEGRAM_TOKEN;
     }
 
     @Override
