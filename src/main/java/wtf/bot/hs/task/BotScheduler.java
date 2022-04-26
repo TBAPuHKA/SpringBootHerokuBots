@@ -10,6 +10,7 @@ import wtf.bot.hs.service.DiscordService;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
 @Slf4j
 @Service
@@ -20,14 +21,14 @@ public class BotScheduler {
 //1800000L
     void pingMethod() throws IOException {
 
-        URL url = new URL("https://horizont-disc-bot.herokuapp.com/");
+        URL url = new URL(AppConstants.HEROKU_URL);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setConnectTimeout(3000);
         connection.connect();
         int responseCode = connection.getResponseCode();
 
-        DiscordService.getDiscordService().testMessage(String.format(AppConstants.LOGGING_MESSAGE_FORMAT, "BotScheduler.class", "PING to " + url + ": " + responseCode, "OK"));
+        DiscordService.getDiscordService().testMessage(String.format(AppConstants.LOGGING_MESSAGE_FORMAT + " %s", "BotScheduler.class", "PING to " + url + ": " + responseCode, "OK", new Date()));
         log.info(String.format(AppConstants.LOGGING_MESSAGE_FORMAT, "BotScheduler.class", "PING", "OK"));
 
     }

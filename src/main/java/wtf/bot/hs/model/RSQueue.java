@@ -1,4 +1,4 @@
-package wtf.bot.hs.Model;
+package wtf.bot.hs.model;
 
 public class RSQueue {
 }

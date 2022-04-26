@@ -53,7 +53,7 @@ public class DiscordService extends ListenerAdapter {
         } catch (InterruptedException | LoginException e) {
             e.printStackTrace();
         }
-        this.testMessage("UTBotHorizontApplication | STARTED");
+        this.testMessage("UTBotHorizontApplication | STARTED | " + new Date());
         log.warn(String.format(AppConstants.LOGGING_MESSAGE_FORMAT, "DiscordService.startDiscord()", "DONE", "Bot is ONLINE"));
 
         jda.addEventListener(new DiscordService());
@@ -87,7 +87,8 @@ public class DiscordService extends ListenerAdapter {
         long time = System.currentTimeMillis();
         this.textChannel = getTextChannelById((MY_TEST_CHANNEL_ID));
         if (textChannel != null) {
-            this.textChannel.sendMessage(String.format(AppConstants.TEST_MESSAGE_FORMAT, message, textChannel.toString(), new Date(), System.currentTimeMillis() - time)).queue();
+            this.textChannel.sendMessage(message).queue();
+//            this.textChannel.sendMessage(String.format(AppConstants.TEST_MESSAGE_FORMAT, message, textChannel.toString(), new Date(), System.currentTimeMillis() - time)).queue();
             log.warn(textChannel.toString());
         }
     }

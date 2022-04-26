@@ -4,6 +4,7 @@ public class AppConstants {
 
     public static final String PB_TOKEN = System.getenv("PB_TOKEN");
     public static final String PB_ID = System.getenv("PB_ID");
+    public static final String HEROKU_URL = "https://horizont-disc-bot.herokuapp.com/";
     public static final String PB_CURRENCY_FP =  "https://acp.privatbank.ua/api/proxy/currency/";
     public static final String PB_CURRENCY_ARCHIVE = "https://api.privatbank.ua/p24api/exchange_rates?json&date=04.04.2022";
     public static final String PB_CURRENCY_ID5 = "https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=5";
