@@ -13,26 +13,29 @@ import wtf.bot.hs.util.ForeignExchangeUtil;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Slf4j
 @Service
 @EnableScheduling
 public class PBScheduler {
 
-    @Scheduled(fixedDelay = 3600000L, initialDelay = 60L)
-//1800000L
-    void getCurrency() throws IOException {
+    @Scheduled(fixedDelay = 3600000L, initialDelay = 3600000L)
+    void getCurrency() {
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
         ForeignExchangeUtil feu = new ForeignExchangeUtil();
         List<CurrencyDTO> currencyDTOList = feu.getCurrencyList();
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(AppConstants.DATE_AND_TIME_FORMAT);
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("EET"));
 
-        stringJoiner.add("```arm PrivatBank currency to UAH:");
+        stringJoiner.add("```arm");
+        stringJoiner.add("PrivatBank currency to #UAH:");
         currencyDTOList.forEach(e -> {
-            stringJoiner.add(String.format("Currency: %s | Sale: %f | Buy: %f", e.getCcy(), e.getSale(), e.getBuy()));
+            stringJoiner.add(String.format("Currency: %s | Sale: %.2f | Buy: %.2f", e.getCcy(), e.getSale(), e.getBuy()));
         });
+        stringJoiner.add(simpleDateFormat.format(date) + " " + simpleDateFormat.getTimeZone().getDisplayName());
         stringJoiner.add(" ```");
 
         DiscordService.getDiscordService().testMessage(stringJoiner.toString());

@@ -14,6 +14,9 @@ public class AppConstants {
     public static final String TELEGRAM_USER_NAME = System.getenv("TELEGRAM_USER_NAME");
     public static final String TEST_MESSAGE_FORMAT = "[%s] | %s | %s | %d ms";
     public static final String LOGGING_MESSAGE_FORMAT = "[%s] | %s | %s";
+    public final static String DATE_FORMAT = "dd-MM-yy";
+    public final static String TIME_FORMAT = "HH:mm:ss";
+    public final static String DATE_AND_TIME_FORMAT = String.format("%s %s", DATE_FORMAT, TIME_FORMAT);
 
 
 

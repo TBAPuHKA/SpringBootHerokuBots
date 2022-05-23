@@ -12,11 +12,13 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.springframework.stereotype.Service;
 import wtf.bot.hs.AppConstants;
 
+import javax.inject.Singleton;
 import javax.security.auth.login.LoginException;
 import java.util.Date;
 
 @Slf4j
 @Service
+@Singleton
 public class DiscordService extends ListenerAdapter {
 
     //@Value("${discord.token}")

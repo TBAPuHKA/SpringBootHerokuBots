@@ -10,8 +10,11 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import wtf.bot.hs.AppConstants;
 
+import javax.inject.Singleton;
+
 @Slf4j
 @Service
+@Singleton
 public class TelegramService extends TelegramLongPollingBot {
 
     public static void startTelegram() {
