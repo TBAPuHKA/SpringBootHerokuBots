@@ -3,10 +3,10 @@ package wtf.bot.hs;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class UTBotHorizontApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 

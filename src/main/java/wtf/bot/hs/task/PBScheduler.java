@@ -1,18 +1,15 @@
 package wtf.bot.hs.task;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import wtf.bot.hs.AppConstants;
 import wtf.bot.hs.dto.CurrencyDTO;
-import wtf.bot.hs.model.enums.CurrencyType;
-import wtf.bot.hs.service.DiscordService;
+import wtf.bot.hs.service.impl.DiscordServiceImpl;
 import wtf.bot.hs.util.ForeignExchangeUtil;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -21,6 +18,12 @@ import java.util.*;
 @EnableScheduling
 public class PBScheduler {
 
+    @Autowired
+    DiscordServiceImpl discordService;
+
+    //FOR TESTs
+//    @Scheduled(fixedDelay = 30000L, initialDelay = 30000L)
+    //PROD
     @Scheduled(fixedDelay = 3600000L, initialDelay = 3600000L)
     void getCurrency() {
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
@@ -38,7 +41,8 @@ public class PBScheduler {
         stringJoiner.add(simpleDateFormat.format(date) + " " + simpleDateFormat.getTimeZone().getDisplayName());
         stringJoiner.add(" ```");
 
-        DiscordService.getDiscordService().testMessage(stringJoiner.toString());
+//        DiscordServiceImpl.getDiscordService().testMessage(stringJoiner.toString());
+        discordService.testMessage(stringJoiner.toString());
         log.info(String.format(AppConstants.LOGGING_MESSAGE_FORMAT, "PBScheduler", "getCurrency", "OK"));
 
     }

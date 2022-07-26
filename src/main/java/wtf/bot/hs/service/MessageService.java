@@ -1,4 +1,7 @@
 package wtf.bot.hs.service;
 
-public class MessageService {
+public interface MessageService {
+
+    void getMessage();
+    void sendMessage();
 }

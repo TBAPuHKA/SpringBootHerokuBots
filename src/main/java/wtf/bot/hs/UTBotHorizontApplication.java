@@ -4,10 +4,8 @@ package wtf.bot.hs;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import wtf.bot.hs.service.DiscordService;
-import wtf.bot.hs.service.TelegramService;
-
-import java.util.Date;
+import wtf.bot.hs.service.impl.DiscordServiceImpl;
+import wtf.bot.hs.service.impl.TelegramServiceImpl;
 
 @Slf4j
 @SpringBootApplication
@@ -19,10 +17,9 @@ public class UTBotHorizontApplication {
 		SpringApplication.run(UTBotHorizontApplication.class, args);
 
 //===== START [TELEGRAM]
-		TelegramService.startTelegram();
+		new TelegramServiceImpl().startBot();
 
 //===== START [DISCORD]
-		DiscordService discordService = DiscordService.getDiscordService();
-		discordService.startDiscord();
+		new DiscordServiceImpl().startBot();
 	}
 }
